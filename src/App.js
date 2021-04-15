@@ -10,7 +10,7 @@ function App() {
             <div className="App container mx-auto relative">
                 <div className="flex text-4xl my-20 font-bold justify-center px-44">
                     <h1 className="pr-44">
-                        <Link to="/">First Method</Link>
+                        <Link to="/first">First Method</Link>
                     </h1>
                     <h1>
                         <Link to="/second">Second Method</Link>
@@ -18,7 +18,7 @@ function App() {
                 </div>
 
                 <Switch>
-                    <Route exact path="/">
+                    <Route exact path="/first">
                         <FirstMethod />
                     </Route>
                     <Route exact path="/second">
