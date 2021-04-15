@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -13,6 +13,29 @@ function App() {
     const [key, setKey] = useState('');
     const [selection, setSelection] = useState('');
     console.log(state);
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    if(!selection){
+                        var ele = document.getElementById('aa');
+                        ele.style.display = 'none';
+                    }
+                }
+            }
+
+            // Bind the event listener
+            document.addEventListener('mousedown', handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+        }, [ref]);
+    }
 
     // push to github and eploy to github pages
     const mouseUp = function (e) {
@@ -70,7 +93,8 @@ function App() {
     const handleChange = (e) => {
         setText(e.target.value);
     };
-
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
     const popupDiv = (
         <div id="popup">
             <h2>enter some text</h2>
@@ -98,7 +122,7 @@ function App() {
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, eque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
                         sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
                     </p>
-                    <div id="aa" onClick={(e) => clicked(e)}>
+                    <div ref={wrapperRef} id="aa" onClick={(e) => clicked(e)}>
                         <Button variant="contained" color="secondary">
                             +
                         </Button>
