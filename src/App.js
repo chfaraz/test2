@@ -10,10 +10,10 @@ function App() {
             <div className="App container mx-auto relative">
                 <div className="flex text-4xl my-20 font-bold justify-center px-44">
                     <h1 className="pr-44">
-                        <Link to="/faraz3/first">First Method</Link>
+                        <Link to="/test2/first">First Method</Link>
                     </h1>
                     <h1>
-                        <Link to="/faraz3/second">Second Method</Link>
+                        <Link to="/test2/second">Second Method</Link>
                     </h1>
                 </div>
 
