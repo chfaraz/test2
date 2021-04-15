@@ -30,16 +30,23 @@ code {
 }
 
 #popup {
-    position: absolute;
-    border: rgb(255, 0, 0) solid 1px;
+    border: rgb(0, 0, 0) solid 1px;
     padding: 20px 10px;
     font-size: 35px;
     font-weight: 700;
-    top: 20%;
     border-radius: 20px;
-    left: 30%;
-    background: rgb(226, 167, 112);
+    background: rgb(187, 187, 187);
     z-index: 2;
+    width: 30%;
+    top: 20%;
+    left: 35%;
+    position: absolute;
+}
+#popup h2 {
+    font-size: 28px;
+}
+#popup textarea {
+    font-size: 18px;
 }
 #cal1 {
     position: absolute;

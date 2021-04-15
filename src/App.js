@@ -20,13 +20,14 @@ function App() {
         var x = e.clientX;
         var y = e.clientY;
         var selection;
-
+        var p = '';
         selection = window.getSelection();
-        var p = selection.toString();
-
-        setSelection(p);
+        if (!popup) {
+            p = selection.toString();
+            setSelection(p);
+        }
         // selection.toString() !== '' && alert(selection.toString() + e.pageX + '/' + e.pageY);
-        if (p.length > 0) {
+        if (p.length > 0 && !popup) {
             aaa.style.display = 'block';
             aaa.style.top = y - 100 + 'px';
             aaa.style.left = x - 90 + 'px';
@@ -72,7 +73,7 @@ function App() {
 
     const popupDiv = (
         <div id="popup">
-            <h1>enter some text</h1>
+            <h2>enter some text</h2>
             <textarea value={text} onChange={(e) => handleChange(e)}></textarea>
             <div className="buttons">
                 <Button variant="contained" color="secondary" onClick={() => setPopup(false)}>
