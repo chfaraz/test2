@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 function App() {
     const [popup, setPopup] = useState(false);
     const [button, setButton] = useState(false);
+    const [error, setError] = useState(false);
     const [state, setState] = useState([]);
     const [text, setText] = useState('');
     const [key, setKey] = useState('');
@@ -81,6 +82,7 @@ function App() {
             setPopup(false);
         } else {
             console.log('please enter some text');
+            setError(true);
         }
         var ele = document.getElementById('aa');
         ele.style.display = 'none';
@@ -94,6 +96,7 @@ function App() {
 
     const handleChange = (e) => {
         setText(e.target.value);
+        setError(false);
     };
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
@@ -114,7 +117,7 @@ function App() {
                     {/* <Typography className="" color="textSecondary" gutterBottom>
                         enter some text
                     </Typography> */}
-                    <TextField id="outlined-multiline-static" onChange={(e) => handleChange(e)} label="Enter Some Text" multiline rows={4} defaultValue="" variant="outlined" />
+                    <TextField id="outlined-multiline-static" helperText={error ? "Can't be empty" : null} error={error} onChange={(e) => handleChange(e)} label="Enter Some Text" multiline rows={4} defaultValue="" variant="outlined" />
                 </CardContent>
                 <CardActions>
                     <div className="buttons">
