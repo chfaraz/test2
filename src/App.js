@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FirstMethod from './firstMethod';
-import SecondMethod from './secondMethod';
 
 function App() {
     const [popup, setPopup] = useState(false);
@@ -12,7 +14,9 @@ function App() {
     const [text, setText] = useState('');
     const [key, setKey] = useState('');
     const [selection, setSelection] = useState('');
-    console.log(state);
+    useEffect(() => {
+        console.log(state);
+    }, [state]);
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
@@ -21,7 +25,7 @@ function App() {
              */
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
-                    if(!selection){
+                    if (!selection) {
                         var ele = document.getElementById('aa');
                         ele.style.display = 'none';
                     }
@@ -64,8 +68,6 @@ function App() {
         // e.stopPropagation();
     };
     const setData = (e) => {
-        console.log(text);
-        console.log(key);
         var d = new Date();
         if (text !== '') {
             setState(
@@ -97,7 +99,7 @@ function App() {
     useOutsideAlerter(wrapperRef);
     const popupDiv = (
         <div id="popup">
-            <h2>enter some text</h2>
+            {/* <h2>enter some text</h2>
             <textarea value={text} onChange={(e) => handleChange(e)}></textarea>
             <div className="buttons">
                 <Button variant="contained" color="secondary" onClick={() => setPopup(false)}>
@@ -106,7 +108,25 @@ function App() {
                 <Button variant="contained" color="primary" onClick={(e) => setData(e)}>
                     Add
                 </Button>
-            </div>
+            </div> */}
+            <Card className="">
+                <CardContent>
+                    {/* <Typography className="" color="textSecondary" gutterBottom>
+                        enter some text
+                    </Typography> */}
+                    <TextField id="outlined-multiline-static" onChange={(e) => handleChange(e)} label="Enter Some Text" multiline rows={4} defaultValue="" variant="outlined" />
+                </CardContent>
+                <CardActions>
+                    <div className="buttons">
+                        <Button variant="contained" color="secondary" onClick={() => setPopup(false)}>
+                            Close
+                        </Button>
+                        <Button variant="contained" color="primary" onClick={(e) => setData(e)}>
+                            Add
+                        </Button>
+                    </div>
+                </CardActions>
+            </Card>
         </div>
     );
     return (
