@@ -99,3 +99,7 @@ h1 {
     width: 100%;
     justify-content: space-around;
 }
+.download {
+    display: flex;
+    justify-content: center;
+}

@@ -234,9 +234,11 @@ function App() {
                     </div>
                 </div>
                 {popup ? popupDiv : null}
-                <Button variant="contained" color="secondary">
-                    <CSVLink data={state}>Download</CSVLink>
-                </Button>
+                <div className="download">
+                    <Button variant="contained" color="secondary">
+                        <CSVLink data={state}>Download</CSVLink>
+                    </Button>
+                </div>
             </div>
         </div>
     );
