@@ -96,7 +96,10 @@ textarea {
     display: none;
     left: 0;
     background: #fff;
-    padding: 10px;
+    padding: 10px 15px;
+    box-shadow: 0px 0px 13px 1px gray;
+    border-radius: 5px;
+    align-items: center;
 }
 h1 {
     font-size: 55px;
@@ -113,13 +116,22 @@ h1 {
     justify-content: center;
 }
 #tip div {
-    position: relative;
+    display: flex;
 }
 #tip span {
-    position: absolute;
-    right: -8px;
-    top: -15px;
     color: red;
     font-weight: 800;
+    margin-left: 15px;
     cursor: pointer;
+    border: 2px solid rgb(169, 169, 169);
+    padding: 4px;
+    border-radius: 5px;
+}
+#tip span:hover {
+    color: black;
+    padding: 4px;
+    background: rgb(221, 221, 221);
+}
+#tip div p {
+    padding-top: 5px;
 }
