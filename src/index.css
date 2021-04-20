@@ -121,4 +121,5 @@ h1 {
     top: -15px;
     color: red;
     font-weight: 800;
+    cursor: pointer;
 }

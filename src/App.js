@@ -301,7 +301,7 @@ function App() {
                                   pattern: new RegExp(`(${values})`, 'gi'),
                                   decorator: (highlight, index) => {
                                       return (
-                                          <span key={index} style={{ fontWeight: 'bold', background: 'yellow' }} onClick={(e) => hover(e)}>
+                                          <span key={index} style={{ fontWeight: 'bold', background: 'yellow',  cursor: 'pointer' }} onClick={(e) => hover(e)}>
                                               {highlight}
                                           </span>
                                       );
