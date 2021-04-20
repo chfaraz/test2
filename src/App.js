@@ -62,7 +62,26 @@ function App() {
             };
         }, [ref]);
     }
+    function useOutsideClickTip(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    var ele2 = document.getElementById('tip');
+                    ele2.style.display = 'none';
+                }
+            }
 
+            // Bind the event listener
+            document.addEventListener('mousedown', handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+        }, [ref]);
+    }
     // push to github and eploy to github pages
     const mouseUp = function (e) {
         var aaa = document.getElementById('aa');
@@ -152,7 +171,7 @@ function App() {
 
     const hover = (e) => {
         let data = state.map((state) => {
-                return state.selectedText.toUpperCase() === e.target.innerText.toUpperCase() ? state.writtenText : null;
+            return state.selectedText.toUpperCase() === e.target.innerText.toUpperCase() ? state.writtenText : null;
         });
         setHover(data);
         console.log(data.join(''));
@@ -175,6 +194,8 @@ function App() {
 
     const wrapperRef = useRef(null);
     useOutsideClick(wrapperRef);
+    const hoverRef = useRef(null);
+    useOutsideClickTip(hoverRef);
     const popupDiv = (
         <div id="popup">
             {/* <h2>enter some text</h2>
@@ -245,6 +266,17 @@ function App() {
     //       }
     //     }
     //   }
+    const deleteData = () => {
+        const hovere = hoverData.filter((hoverdata) => {
+            return hoverdata !== null;
+        });
+        const data = state.filter((state) => {
+            return hovere[0] !== state.writtenText;
+        });
+        setState(data);
+        var ele2 = document.getElementById('tip');
+        ele2.style.display = 'none';
+    };
 
     return (
         <div className="App">
@@ -269,7 +301,7 @@ function App() {
                                   pattern: new RegExp(`(${values})`, 'gi'),
                                   decorator: (highlight, index) => {
                                       return (
-                                          <span key={index} style={{ fontWeight: 'bold', background: 'yellow' }} onMouseOver={(e) => hover(e)} onMouseOut={mouseOut}>
+                                          <span key={index} style={{ fontWeight: 'bold', background: 'yellow' }} onClick={(e) => hover(e)}>
                                               {highlight}
                                           </span>
                                       );
@@ -284,7 +316,12 @@ function App() {
                         </Button>
                     </div>
                 </div>
-                <div id="tip">{hoverData}</div>
+                <div ref={hoverRef} id="tip">
+                    <div>
+                        <span onClick={deleteData}>X</span>
+                    </div>
+                    {hoverData}
+                </div>
                 {popup ? popupDiv : null}
                 <div className="download">
                     <Button variant="contained" color="secondary">

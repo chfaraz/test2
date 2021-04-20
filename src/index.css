@@ -112,3 +112,13 @@ h1 {
     display: flex;
     justify-content: center;
 }
+#tip div {
+    position: relative;
+}
+#tip span {
+    position: absolute;
+    right: -8px;
+    top: -15px;
+    color: red;
+    font-weight: 800;
+}
